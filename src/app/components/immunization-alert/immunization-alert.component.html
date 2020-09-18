@@ -1,0 +1,117 @@
+<div class="card" id="immunizationModal">
+    <div class="card-header">
+        <label class="mb-0">Alerts</label>
+        <button class="btn" id="close-btn" (click)="closeModal()">x</button>
+    </div>
+    <div class="card-body">
+        <mat-tab-group mat-align-tabs="end" class="remove-border-bottom">
+            <mat-tab label="Immunization Alerts">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="alert-heading">Immunization Alerts</h2>
+                                </div>
+                                <div class="col-md-9 my-auto">
+                                    <label class="mb-0">Find</label>
+                                    <input (keyup)="applyFilter($event)" class="input-field" #input>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button class="btn btn-default gray-btn" (click)="deleteRows()">Delete</button>
+                                </div>
+                            </div>
+
+                            <div class="table-container">
+                                <table mat-table [dataSource]="dataSource" matSort class="table-bordered">
+                                    <ng-container matColumnDef="select">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                [checked]="selection.hasValue() && isAllSelected()"
+                                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                [aria-label]="checkboxLabel()">
+                                            </mat-checkbox>
+                                        </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-checkbox (click)="$event.stopPropagation()"
+                                                (change)="$event ? selection.toggle(row) : null"
+                                                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                            </mat-checkbox>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+
+                                    <!-- Description Column -->
+                                    <ng-container matColumnDef="description">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                    </ng-container>
+
+                                    <!-- Reference Column -->
+                                    <ng-container matColumnDef="webReference">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Web Reference </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.webReference}} </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                        </div>
+                        <div class="col-md-5" id="right-col">
+                            <form id="userForm" [formGroup]="userForm" (ngSubmit)="onUserFormSubmit(userForm)">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-3 col-form-label">Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" formControlName="name" class="form-control" id="name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword" class="col-sm-3 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" formControlName="description" id="desc">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword" class="col-sm-3 col-form-label">Web Ref.</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" formControlName="webReference"
+                                            id="webReference">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn gray-btn"
+                                            [disabled]="userForm.invalid">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="footer-btns">
+                                <button type="button" class="btn btn-secondary mr-2"
+                                    (click)="closeModal()">Cancel</button>
+                                <button type="button" class="btn btn-primary">Ok
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Lab Alerts">Content 2</mat-tab>
+            <mat-tab label="DI Alerts" class="mr-2">Content 3</mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

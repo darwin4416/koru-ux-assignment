@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-dialog-container{
+    padding:0 !important;
+    background-color: #f1f1f1;
+
+}
+.cdk-overlay-pane{
+    max-width:95vw !important;
+}
+.mat-tab-label {
+    height: 36px !important;
+    padding: 0 12px !important;
+    opacity: 1 !important;
+    min-width: 140px;
+    top:2px;
+    background-color: #03a9f4;
+    color:white;
+}
+.mat-tab-label-active{
+    background-color: #f1f1f1 !important;
+    color:#03a9f4 !important;
+    border-top: 2px solid #03a9f4 !important;
+    border-left: 2px solid #03a9f4 !important;
+    border-right: 2px solid #03a9f4 !important;
+
+    
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: transparent;
+}
+.remove-border-bottom .mat-tab-header {
+    border-bottom: none;
+}
+.mat-tab-header .mat-tab-labels{
+    border-bottom:2px solid #03a9f4 !important;
+}
+.mat-paginator-container{
+    justify-content: flex-start !important;
+    background-color: #f1f1f1 !important;
+}
